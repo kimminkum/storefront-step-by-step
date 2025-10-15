@@ -16,7 +16,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    "paths": { "@/*": ["./*"] },
+    "paths": { "@/*": ["src/*"] },
     "plugins": [{ "name": "next" }],
     "esModuleInterop": true
   },

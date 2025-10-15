@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
+// src/app/layout.tsx
 import "./globals.css";
 import Providers from "./providers";
-
-export const metadata: Metadata = {
-  title: "Storefront – Step by Step",
-  description: "Incrementally built storefront UI"
-};
 
 export default function RootLayout({
   children
