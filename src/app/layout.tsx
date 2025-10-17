@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import "./globals.css";
 import Providers from "./providers";
+import Link from "next/link";
 
 export default function RootLayout({
   children
@@ -14,7 +15,12 @@ export default function RootLayout({
           <header className="border-b bg-white">
             <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
               <h1 className="text-xl font-semibold">Storefront</h1>
-              <nav className="text-sm text-gray-600">/products</nav>
+              <Link
+                href="/products"
+                className="text-sm text-gray-600 hover:text-blue-600"
+              >
+                /products
+              </Link>
             </div>
           </header>
           <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>

@@ -5,17 +5,25 @@ export interface Product {
   id: string;
   name: string;
   description: string;
+  price: number;
   image: string;
   category: string;
-  price: number;
+  stock: number;
   rating: number;
   reviewCount: number;
-  stock: number; // 0이면 품절
-  createdAt: string; // ISO
-  updatedAt?: string; // ✅ 선택 필드로 추가
+  createdAt: string;
+  // updatedAt: string;
 }
 
-export type PaginatedResponse<T> = {
+export interface ProductFilters {
+  category?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  inStock?: boolean;
+  search?: string;
+}
+
+export interface PaginatedResponse<T> {
   data: T[];
   pagination: {
     page: number;
@@ -25,12 +33,4 @@ export type PaginatedResponse<T> = {
     hasNext: boolean;
     hasPrev: boolean;
   };
-};
-
-export type ProductFilters = {
-  category?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  inStock?: boolean;
-  search?: string;
-};
+}
