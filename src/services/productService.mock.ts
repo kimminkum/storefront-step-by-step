@@ -1,4 +1,5 @@
 import type { PaginatedResponse, Product } from "@/types";
+import type { GetProductsParams, ServiceOptions } from "./productService";
 
 const CATEGORIES = [
   "electronics",
@@ -20,7 +21,7 @@ function generateMockProducts(count: number): Product[] {
   const list: Product[] = [];
   for (let i = 1; i <= count; i++) {
     const category = pick(CATEGORIES);
-    const price = Math.floor(Math.random() * 1000) + 10;
+    const price = (Math.floor(Math.random() * 1000) + 1) * 10_00;
     const stock = Math.floor(Math.random() * 50);
     const rating = Math.round((Math.random() * 2 + 3) * 10) / 10;
     const reviewCount = Math.floor(Math.random() * 500);
@@ -47,7 +48,19 @@ function generateMockProducts(count: number): Product[] {
 
 const DB: Product[] = generateMockProducts(100);
 
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const delay = (ms: number, signal?: AbortSignal) =>
+  new Promise<void>((resolve, reject) => {
+    const id = setTimeout(() => resolve(), ms);
+    const onAbort = () => {
+      clearTimeout(id);
+      const err = new DOMException("Aborted", "AbortError");
+      reject(err);
+    };
+    if (signal) {
+      if (signal.aborted) return onAbort();
+      signal.addEventListener("abort", onAbort, { once: true });
+    }
+  });
 
 function paginate<T>(items: T[], page = 1, limit = 12): PaginatedResponse<T> {
   const total = items.length;
@@ -98,85 +111,77 @@ function comPareBy<K extends keyof Product>(
   return order === "asc" ? result : -result;
 }
 
-async function getProducts(params: {
-  page?: number;
-  limit?: number;
-  search?: string;
-  category?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  inStock?: boolean;
-  sortBy?: "name" | "price" | "rating" | "createdAt";
-  sortOrder?: "asc" | "desc";
-}): Promise<PaginatedResponse<Product>> {
-  const {
-    page = 1,
-    limit = 12,
-    search,
-    category,
-    minPrice,
-    maxPrice,
-    inStock,
-    sortBy = "createdAt",
-    sortOrder = "desc"
-  } = params;
-
-  let filteredProducts = [...DB];
-
-  if (search) {
-    filteredProducts = filteredProducts.filter(
-      (product) =>
-        product.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLocaleLowerCase())
-    );
+function normalizeBool(v: unknown): boolean | undefined {
+  if (v == null) return undefined;
+  if (typeof v === "boolean") return v;
+  if (typeof v === "string") {
+    const s = v.toLowerCase();
+    if (s === "true") return true;
+    if (s === "false") return false;
   }
-
-  if (category) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.category === category
-    );
-  }
-
-  if (minPrice !== undefined) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.price >= minPrice
-    );
-  }
-
-  if (maxPrice !== undefined) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.price <= maxPrice
-    );
-  }
-
-  if (inStock !== null) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.stock > 0 === inStock
-    );
-  }
-
-  filteredProducts.sort((a, b) => comPareBy(a, b, sortBy, sortOrder));
-
-  await delay(300);
-
-  return paginate(filteredProducts, page, limit);
-}
-
-async function getProduct(id: string) {
-  await delay(200);
-  const found = DB.find((p) => p.id === id);
-  if (!found) throw new Error("Product not found");
-  return found;
-}
-
-async function getCategories(): Promise<string[]> {
-  const sorted = Array.from(new Set(DB.map((p) => p.category))).sort();
-  await delay(150);
-  return sorted;
+  return undefined;
 }
 
 export const productService = {
-  getCategories,
-  getProducts,
-  getProduct
+  async getCategories(opts?: ServiceOptions): Promise<string[]> {
+    await delay(150, opts?.signal);
+    return Array.from(new Set(DB.map((p) => p.category))).sort();
+  },
+  async getProducts(
+    params: GetProductsParams,
+    opts?: ServiceOptions
+  ): Promise<PaginatedResponse<Product>> {
+    const {
+      page = 1,
+      limit = 12,
+      search,
+      category,
+      minPrice,
+      maxPrice,
+      inStock,
+      sortBy = "createdAt",
+      sortOrder = "desc"
+    } = params ?? {};
+
+    let list = [...DB];
+
+    const inStockBool = normalizeBool(inStock);
+
+    if (search) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q)
+      );
+    }
+
+    if (category) {
+      list = list.filter((p) => p.category === category);
+    }
+
+    if (minPrice !== undefined) {
+      list = list.filter((p) => p.price >= minPrice);
+    }
+
+    if (maxPrice !== undefined) {
+      list = list.filter((p) => p.price <= maxPrice);
+    }
+
+    if (inStockBool !== undefined) {
+      list = list.filter((p) => p.stock > 0 === inStockBool);
+    }
+
+    // 4) 정렬
+    list.sort((a, b) => comPareBy(a, b, sortBy, sortOrder));
+
+    await delay(300, opts?.signal);
+    return paginate(list, page, limit);
+  },
+  async getProduct(id: string, opts?: ServiceOptions): Promise<Product> {
+    const found = DB.find((p) => p.id === id);
+    await delay(200, opts?.signal);
+    if (!found) throw new Error("Product not found");
+    return found;
+  }
 };
