@@ -6,6 +6,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useDebounceValue } from "@/lib/debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { formatKRW } from "@/lib/money";
+import { ProductCard } from "@/components/ProductCard";
 import type { ProductFilters, SortOption, SortOrder } from "@/types";
 
 type NavMode = "push" | "replace";
@@ -213,12 +214,9 @@ export default function ProductsPage() {
       {isLoading && <div>잠시만 기다려 주세요...</div>}
       {error && <div> 죄송합니다. Error: {String(error)}</div>}
 
-      <ul className="grid grid-cols-2 gap-4">
-        {items.map((p) => (
-          <li key={p.id} className="border rounded p-3">
-            <div className="font-semibold">{p.name}</div>
-            <div className="text-sm text-gray-600">{formatKRW(p.price)}</div>
-          </li>
+      <ul className="grid grid-cols-3 gap-4">
+        {items.map((product) => (
+          <ProductCard key={product.id} product={product}></ProductCard>
         ))}
         {!isLoading && items.length === 0 && (
           <li className="col-span-full text-gray-500">No result</li>
