@@ -4,17 +4,39 @@ import { use } from "react";
 import { useProduct } from "@/hooks/useProduct";
 import Image from "next/image";
 import { formatKRW } from "@/lib/money";
+import { useCartStore } from "@/stores/cartStore";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
 export default function ProductDetailPage({ params }: PageProps) {
-  const resolevdParams = use(params);
-  const { data: product, isLoading, error } = useProduct(resolevdParams.id);
+  const resolvedParams = use(params);
+  const cartItems = useCartStore((state) => state.items);
+  const isInCart = cartItems.some(
+    (item) => item.product.id === resolvedParams.id
+  );
+  const cartItem = cartItems.find(
+    (item) => item.product.id === resolvedParams.id
+  );
+  const quantity = cartItem?.quantity || 0;
+
+  const { data: product, isLoading, error } = useProduct(resolvedParams.id);
+
+  const addToCart = useCartStore((state) => state.addItem);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const getTotalItems = useCartStore((state) => state.getTotalItems);
 
   const onAddToCart = () => {
-    alert(`${product?.name}장바구니에 담겼습니다!`);
+    if (!product) return;
+
+    if (isInCart) {
+      removeItem(product.id);
+      alert(`${product?.name}을(를) 장바구니에 제거했습니다!!`);
+    } else {
+      addToCart(product, 1);
+      alert(`${product?.name}을(를) 장바구니에 담겼습니다!`);
+    }
   };
 
   if (isLoading) {
@@ -141,7 +163,11 @@ export default function ProductDetailPage({ params }: PageProps) {
             <div className="bg-white rounded-lg shadow-md p-6">
               <button
                 disabled={product.stock === 0}
-                className="w-full py-4 px-6 rounded-lg font-semibold text-lg bg-blue-600 text-white hover:bg-blue-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-3 cursor-pointer"
+                className={`w-full py-4 px-6 rounded-lg font-semibold text-lg ${
+                  isInCart
+                    ? "bg-green-600 hover:bg-green-700"
+                    : "bg-blue-600 hover:bg-blue-800"
+                } text-white disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-3 cursor-pointer`}
                 onClick={onAddToCart}
               >
                 <svg
@@ -157,7 +183,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
                   />
                 </svg>
-                {product.stock > 0 ? "장바구니에 담기" : "품절"}
+                {product.stock > 0
+                  ? isInCart
+                    ? "장바구니에서 제거"
+                    : "장바구니에 담기"
+                  : "품절"}
               </button>
             </div>
           </div>
