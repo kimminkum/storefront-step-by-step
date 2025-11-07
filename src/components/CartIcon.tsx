@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
 interface CartIconProps {
@@ -9,16 +9,20 @@ interface CartIconProps {
 
 export const CartIcon = ({ totalItems }: CartIconProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const prevTotalItems = useRef(0);
 
+  // totalItems가 변경될 때마다 애니메이션 실행
   useEffect(() => {
-    if (totalItems > 0) {
+    if (totalItems !== prevTotalItems.current && totalItems > 0) {
       setIsAnimating(true);
       const timer = setTimeout(() => {
         setIsAnimating(false);
-      }, 500);
+      }, 600);
 
+      prevTotalItems.current = totalItems;
       return () => clearTimeout(timer);
     }
+    prevTotalItems.current = totalItems;
   }, [totalItems]);
 
   return (
@@ -26,25 +30,30 @@ export const CartIcon = ({ totalItems }: CartIconProps) => {
       href="/cart"
       className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors"
     >
+      {/* 더 간단한 장바구니 아이콘 */}
       <svg
-        className={`w-6 h-6 transition-transform duration-300 ${
-          isAnimating ? "scale-125" : "scale-100"
+        className={`w-6 h-6 transition-all duration-300 ${
+          isAnimating ? "scale-150 rotate-12" : "scale-100 rotate-0"
         }`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        strokeWidth={2}
       >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
         />
       </svg>
 
-      {/* 장바구니 개수 뱃지 */}
+      {/* 장바구니 개수 뱃지 - 애니메이션 추가 */}
       {totalItems > 0 && (
-        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+        <span
+          className={`absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold transition-all duration-300 ${
+            isAnimating ? "scale-125" : "scale-100"
+          }`}
+        >
           {totalItems}
         </span>
       )}

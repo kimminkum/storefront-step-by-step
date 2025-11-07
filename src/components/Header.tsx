@@ -4,9 +4,9 @@ import Link from "next/link";
 import { CartIcon } from "@/components/CartIcon";
 import { useCartStore } from "@/stores/cartStore";
 
-export function Header() {
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
-  const totalItems = getTotalItems();
+export const Header = () => {
+  const items = useCartStore((state) => state.items);
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
@@ -34,4 +34,4 @@ export function Header() {
       </div>
     </header>
   );
-}
+};
