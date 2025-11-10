@@ -1,0 +1,1 @@
+export { CurtainRevealScroll } from "./CurtainRevealScroll";

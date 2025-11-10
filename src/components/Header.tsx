@@ -26,6 +26,12 @@ export const Header = () => {
             >
               상품 목록
             </Link>
+            <Link
+              href="/events"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              기술 쇼케이스
+            </Link>
 
             {/* 장바구니 아이콘 */}
             <CartIcon totalItems={totalItems} />

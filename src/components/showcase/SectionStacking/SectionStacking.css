@@ -1,0 +1,14 @@
+.section-stacking-container {
+  position: relative;
+}
+
+.section-stacking-item {
+  position: sticky;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Transparent mode - 배경 없이 겹치기 */
+.section-stacking-container.transparent .section-stacking-item {
+  background: transparent;
+}

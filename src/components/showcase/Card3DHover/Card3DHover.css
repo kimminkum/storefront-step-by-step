@@ -1,0 +1,10 @@
+.card-3d-hover {
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-3d-hover > * {
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+}

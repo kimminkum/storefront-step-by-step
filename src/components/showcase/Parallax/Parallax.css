@@ -1,0 +1,7 @@
+.parallax-container {
+  overflow: hidden;
+}
+
+.parallax-content {
+  will-change: transform;
+}

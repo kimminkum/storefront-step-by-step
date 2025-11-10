@@ -1,104 +1,181 @@
 "use client";
-import Image from "next/image";
+
+import Link from "next/link";
+import { useCartStore } from "@/stores/cartStore";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const items = useCartStore((state) => state.items);
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+          <div className="text-center animate-fade-in">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+              Welcome to{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Store
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              최고의 상품을 최저가로 만나보세요
+              <br />
+              프론트엔드 개발자의 포트폴리오 프로젝트
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Link
+                href="/products"
+                className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                🛍️ 쇼핑 시작하기
+              </Link>
+              <Link
+                href="/events"
+                className="px-8 py-4 bg-white text-gray-900 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-lg hover:shadow-xl border-2 border-gray-200"
+              >
+                🎨 기술 쇼케이스
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Decorative Elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+            주요 기능
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 animate-slide-up">
+              <div className="text-5xl mb-4">🛒</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                장바구니 시스템
+              </h3>
+              <p className="text-gray-600">
+                Zustand를 활용한 상태 관리와 LocalStorage 영속성으로 완벽한
+                장바구니 경험을 제공합니다.
+              </p>
+            </div>
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 animate-slide-up"
+              style={{ animationDelay: "100ms" }}
+            >
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                검색 & 필터
+              </h3>
+              <p className="text-gray-600">
+                실시간 검색, 카테고리 필터, 정렬 기능으로 원하는 상품을 빠르게
+                찾을 수 있습니다.
+              </p>
+            </div>
+            <div
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 animate-slide-up"
+              style={{ animationDelay: "200ms" }}
+            >
+              <div className="text-5xl mb-4">📦</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                주문 시스템
+              </h3>
+              <p className="text-gray-600">
+                간편한 체크아웃 플로우와 주문 관리 시스템으로 편리한 쇼핑을
+                경험하세요.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+            기술 스택
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {[
+              "Next.js 15",
+              "React 19",
+              "TypeScript",
+              "Tailwind CSS",
+              "Zustand",
+              "React Query"
+            ].map((tech, index) => (
+              <div
+                key={tech}
+                className="px-6 py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all hover:scale-110 font-semibold text-gray-700 animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                {tech}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            지금 바로 시작하세요
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            {totalItems > 0
+              ? `장바구니에 ${totalItems}개의 상품이 담겨있습니다`
+              : "다양한 상품을 둘러보고 장바구니에 담아보세요"}
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link
+              href="/products"
+              className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-lg"
+            >
+              상품 둘러보기
+            </Link>
+            {totalItems > 0 && (
+              <Link
+                href="/cart"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all hover:scale-105"
+              >
+                장바구니 보기
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-white/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="animate-slide-up">
+              <div className="text-5xl font-bold text-blue-600 mb-2">100+</div>
+              <div className="text-gray-600 font-semibold">상품</div>
+            </div>
+            <div
+              className="animate-slide-up"
+              style={{ animationDelay: "100ms" }}
+            >
+              <div className="text-5xl font-bold text-purple-600 mb-2">20+</div>
+              <div className="text-gray-600 font-semibold">기술 스킬</div>
+            </div>
+            <div
+              className="animate-slide-up"
+              style={{ animationDelay: "200ms" }}
+            >
+              <div className="text-5xl font-bold text-pink-600 mb-2">100%</div>
+              <div className="text-gray-600 font-semibold">만족도</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

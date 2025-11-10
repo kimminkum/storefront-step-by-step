@@ -1,0 +1,1 @@
+export { StickyImageZoom } from "./StickyImageZoom";

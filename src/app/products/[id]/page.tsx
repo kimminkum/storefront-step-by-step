@@ -20,13 +20,11 @@ export default function ProductDetailPage({ params }: PageProps) {
   const cartItem = cartItems.find(
     (item) => item.product.id === resolvedParams.id
   );
-  const quantity = cartItem?.quantity || 0;
 
   const { data: product, isLoading, error } = useProduct(resolvedParams.id);
 
   const addToCart = useCartStore((state) => state.addItem);
   const removeItem = useCartStore((state) => state.removeItem);
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
   const addToast = useToastStore((state) => state.addToast);
 
   const onAddToCart = () => {

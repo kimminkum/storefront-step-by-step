@@ -1,0 +1,20 @@
+.magnetic-button {
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #007aff;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.magnetic-button:hover {
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+}
+
+.magnetic-button:active {
+  transform: scale(0.95);
+}

@@ -1,0 +1,1 @@
+export { TextColorTransition } from "./TextColorTransition";

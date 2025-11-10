@@ -1,0 +1,158 @@
+.text-effect {
+  display: inline-block;
+}
+
+.text-effect-char {
+  display: inline-block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Reveal Effect - 텍스트 색상 전환 */
+.text-effect-reveal {
+  position: relative;
+  display: inline-block;
+}
+
+.text-effect-reveal .text-effect-full {
+  background: linear-gradient(
+    to right,
+    var(--reveal-start-color, #999) 0%,
+    var(--reveal-start-color, #999) 50%,
+    var(--reveal-end-color, #000) 50%,
+    var(--reveal-end-color, #000) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-effect-reveal.animate .text-effect-full {
+  animation: revealColor var(--text-effect-duration, 2000ms) ease-out forwards;
+}
+
+@keyframes revealColor {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+/* Character Disappear Effect */
+.text-effect-character-disappear .text-effect-char.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.text-effect-character-disappear .text-effect-char.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Word by Word / Typing Effect */
+.text-effect-word-by-word .text-effect-char.hidden,
+.text-effect-typing .text-effect-char.hidden {
+  opacity: 0;
+}
+
+.text-effect-word-by-word .text-effect-char.visible,
+.text-effect-typing .text-effect-char.visible {
+  opacity: 1;
+}
+
+.text-effect-typing.animate .text-effect-full::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Glitch Effect */
+.text-effect-glitch {
+  position: relative;
+}
+
+.text-effect-glitch.animate {
+  animation: glitch var(--text-effect-duration, 2000ms) ease-out;
+}
+
+@keyframes glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.text-effect-glitch.animate::before,
+.text-effect-glitch.animate::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.text-effect-glitch.animate::before {
+  animation: glitch-before var(--text-effect-duration, 2000ms) ease-out;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, -2px);
+  opacity: 0.8;
+}
+
+.text-effect-glitch.animate::after {
+  animation: glitch-after var(--text-effect-duration, 2000ms) ease-out;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(2px, 2px);
+  opacity: 0.8;
+}
+
+@keyframes glitch-before {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  33% {
+    transform: translate(-4px, 0);
+  }
+  66% {
+    transform: translate(4px, 0);
+  }
+}
+
+@keyframes glitch-after {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  33% {
+    transform: translate(4px, 0);
+  }
+  66% {
+    transform: translate(-4px, 0);
+  }
+}

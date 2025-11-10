@@ -1,0 +1,381 @@
+.tabs-container {
+  width: 100%;
+  display: flex;
+}
+
+/* ========== 방향 (Orientation) ========== */
+.tabs-horizontal {
+  flex-direction: column;
+}
+
+.tabs-vertical {
+  flex-direction: row;
+  gap: 24px;
+}
+
+/* ========== 탭 헤더 ========== */
+.tabs-header {
+  position: relative;
+  display: flex;
+  background: transparent;
+}
+
+.tabs-horizontal .tabs-header {
+  flex-direction: row;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.tabs-vertical .tabs-header {
+  flex-direction: column;
+  border-right: 2px solid #e5e7eb;
+  border-bottom: none;
+}
+
+/* ========== 탭 버튼 기본 ========== */
+.tab-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  white-space: nowrap;
+  outline: none;
+}
+
+.tab-button:hover:not(.disabled) {
+  color: #1f2937;
+}
+
+.tab-button.active {
+  color: #3b82f6;
+}
+
+.tab-button.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ========== 크기 (Size) ========== */
+.tabs-small .tab-button {
+  padding: 8px 16px;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.tabs-medium .tab-button {
+  padding: 12px 24px;
+  font-size: 15px;
+  gap: 8px;
+}
+
+.tabs-large .tab-button {
+  padding: 16px 32px;
+  font-size: 17px;
+  gap: 10px;
+}
+
+/* ========== Full Width ========== */
+.tabs-full-width .tabs-header {
+  width: 100%;
+}
+
+.tabs-full-width .tab-button {
+  flex: 1;
+}
+
+/* ========== 바리에이션 1: Underline (기본) ========== */
+.tabs-underline .tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #3b82f6;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabs-vertical.tabs-underline .tab-indicator {
+  bottom: auto;
+  left: auto;
+  right: 0;
+  top: 0;
+  width: 3px;
+  height: auto;
+  border-radius: 3px 0 0 3px;
+}
+
+/* ========== 바리에이션 2: Box ========== */
+.tabs-box .tabs-header {
+  border: none;
+  gap: 8px;
+  padding: 4px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.tabs-box .tab-button {
+  border-radius: 6px;
+}
+
+.tabs-box .tab-button.active {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== 바리에이션 3: Pill ========== */
+.tabs-pill .tabs-header {
+  border: none;
+  gap: 12px;
+}
+
+.tabs-pill .tab-button {
+  border-radius: 9999px;
+  background: #f3f4f6;
+}
+
+.tabs-pill .tab-button.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.tabs-pill .tab-button:hover:not(.disabled):not(.active) {
+  background: #e5e7eb;
+}
+
+/* ========== 바리에이션 4: Fill ========== */
+.tabs-fill .tabs-header {
+  border: none;
+  gap: 0;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.tabs-fill .tab-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tabs-fill .tab-button {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== 바리에이션 5: Card ========== */
+.tabs-card .tabs-header {
+  border: none;
+  gap: 12px;
+}
+
+.tabs-card .tab-button {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+}
+
+.tabs-card .tab-button.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+/* ========== 바리에이션 6: Bordered ========== */
+.tabs-bordered .tabs-header {
+  border: none;
+  gap: 0;
+}
+
+.tabs-bordered .tab-button {
+  border: 2px solid #e5e7eb;
+  border-right-width: 0;
+  margin: 0;
+}
+
+.tabs-bordered .tab-button:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.tabs-bordered .tab-button:last-child {
+  border-radius: 0 8px 8px 0;
+  border-right-width: 2px;
+}
+
+.tabs-bordered .tab-button.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  z-index: 1;
+  border-right-width: 2px;
+}
+
+.tabs-bordered .tab-button.active + .tab-button {
+  border-left-width: 0;
+}
+
+/* ========== 바리에이션 7: Lifted ========== */
+.tabs-lifted .tabs-header {
+  border: none;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.tabs-lifted .tab-button {
+  border: 2px solid transparent;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: #f3f4f6;
+  margin-bottom: -2px;
+}
+
+.tabs-lifted .tab-button.active {
+  border-color: #e5e7eb;
+  border-bottom-color: white;
+  background: white;
+  position: relative;
+}
+
+/* ========== 아이콘 ========== */
+.tab-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+/* ========== 배지 ========== */
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tab-button.active .tab-badge {
+  background: #3b82f6;
+}
+
+/* ========== 탭 컨텐츠 ========== */
+.tabs-content {
+  flex: 1;
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+  padding: 24px 0;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.tabs-animated .tab-panel.active {
+  animation: tabFadeIn 0.3s ease;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 768px) {
+  .tabs-horizontal .tabs-header {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tabs-horizontal .tabs-header::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .tabs-vertical {
+    flex-direction: column;
+  }
+
+  .tabs-vertical .tabs-header {
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 2px solid #e5e7eb;
+  }
+}
+
+/* ========== 바리에이션 8: Gradient ========== */
+.tabs-gradient .tab-button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+}
+
+/* ========== 바리에이션 9: Minimal ========== */
+.tabs-minimal .tabs-header {
+  border: none;
+  gap: 24px;
+}
+
+.tabs-minimal .tab-button {
+  padding: 8px 0;
+  font-weight: 400;
+}
+
+.tabs-minimal .tab-button.active {
+  font-weight: 600;
+}
+
+.tabs-minimal .tab-indicator {
+  height: 2px;
+  background: #1f2937;
+}
+
+/* ========== 바리에이션 10: Neon ========== */
+.tabs-neon .tabs-header {
+  border: none;
+  gap: 12px;
+  background: #1a1a2e;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.tabs-neon .tab-button {
+  color: #a0a0a0;
+  border-radius: 8px;
+}
+
+.tabs-neon .tab-button.active {
+  background: linear-gradient(135deg, #00d2ff 0%, #3a47d5 100%);
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+}

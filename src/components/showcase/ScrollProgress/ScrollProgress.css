@@ -1,0 +1,19 @@
+.scroll-progress {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.scroll-progress-top {
+  top: 0;
+}
+
+.scroll-progress-bottom {
+  bottom: 0;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  transition: width 0.1s ease-out;
+}

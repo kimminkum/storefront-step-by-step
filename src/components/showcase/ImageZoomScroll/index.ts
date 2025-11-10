@@ -1,0 +1,1 @@
+export { ImageZoomScroll } from "./ImageZoomScroll";

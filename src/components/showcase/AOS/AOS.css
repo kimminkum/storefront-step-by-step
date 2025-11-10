@@ -1,0 +1,130 @@
+.aos-component {
+  transition-property: opacity, transform;
+  transition-duration: var(--aos-duration, 600ms);
+  transition-timing-function: ease-out;
+  transition-delay: var(--aos-delay, 0ms);
+}
+
+/* Fade Animations */
+.aos-fade {
+  opacity: 0;
+}
+
+.aos-fade.aos-animate {
+  opacity: 1;
+}
+
+.aos-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.aos-fade-up.aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aos-fade-down {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.aos-fade-down.aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aos-fade-left {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.aos-fade-left.aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.aos-fade-right {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.aos-fade-right.aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide Animations */
+.aos-slide-up {
+  transform: translateY(100%);
+}
+
+.aos-slide-up.aos-animate {
+  transform: translateY(0);
+}
+
+.aos-slide-down {
+  transform: translateY(-100%);
+}
+
+.aos-slide-down.aos-animate {
+  transform: translateY(0);
+}
+
+.aos-slide-left {
+  transform: translateX(100%);
+}
+
+.aos-slide-left.aos-animate {
+  transform: translateX(0);
+}
+
+.aos-slide-right {
+  transform: translateX(-100%);
+}
+
+.aos-slide-right.aos-animate {
+  transform: translateX(0);
+}
+
+/* Zoom Animations */
+.aos-zoom-in {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.aos-zoom-in.aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.aos-zoom-out {
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.aos-zoom-out.aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Flip Animations */
+.aos-flip-left {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-90deg);
+}
+
+.aos-flip-left.aos-animate {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0);
+}
+
+.aos-flip-right {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(90deg);
+}
+
+.aos-flip-right.aos-animate {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0);
+}

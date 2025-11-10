@@ -1,0 +1,8 @@
+.scroll-snap-container {
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+
+.scroll-snap-item {
+  scroll-snap-stop: normal;
+}

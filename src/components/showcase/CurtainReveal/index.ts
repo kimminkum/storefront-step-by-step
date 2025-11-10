@@ -1,0 +1,1 @@
+export { CurtainReveal } from "./CurtainReveal";

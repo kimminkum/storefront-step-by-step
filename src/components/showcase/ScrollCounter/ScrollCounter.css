@@ -1,0 +1,12 @@
+.scroll-counter {
+  font-size: 48px;
+  font-weight: 700;
+  color: #007aff;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .scroll-counter {
+    font-size: 32px;
+  }
+}
