@@ -2,6 +2,7 @@
 import "./globals.css";
 import Providers from "./providers";
 import { Header } from "@/components/Header";
+import { ToastContainer } from "@/components/ui/ToastContainer";
 
 export default function RootLayout({
   children
@@ -17,6 +18,7 @@ export default function RootLayout({
           <footer className="border-t mt-16 py-6 text-center text-sm text-gray-500">
             © {new Date().getFullYear()} Storefront
           </footer>
+          <ToastContainer />
         </Providers>
       </body>
     </html>

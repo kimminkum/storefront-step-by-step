@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Rating } from "@/components/Rating";
 import { Badge } from "@/components/ui/Badge";
 import { useCartStore } from "@/stores/cartStore";
+import { useToastStore } from "@/stores/toastStore";
 
 interface ProductCardProps {
   product: Product;
@@ -19,6 +20,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const removeItem = useCartStore((state) => state.removeItem);
   const cartItems = useCartStore((state) => state.items);
   const isInCart = cartItems.some((item) => item.product.id === product.id);
+  const addToast = useToastStore((state) => state.addToast);
 
   const isNew = () => {
     const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -31,8 +33,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
     if (isInCart) {
       removeItem(product.id);
+      addToast(`${product.name}을(를) 장바구니에서 제거했습니다!`, "info");
     } else {
       addToCart(product, 1);
+      addToast(`${product.name}을(를) 장바구니에 담았습니다!`, "success");
     }
   };
 

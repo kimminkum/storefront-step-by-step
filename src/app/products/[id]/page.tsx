@@ -5,6 +5,7 @@ import { useProduct } from "@/hooks/useProduct";
 import Image from "next/image";
 import { formatKRW } from "@/lib/money";
 import { useCartStore } from "@/stores/cartStore";
+import { useToastStore } from "@/stores/toastStore";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -26,16 +27,17 @@ export default function ProductDetailPage({ params }: PageProps) {
   const addToCart = useCartStore((state) => state.addItem);
   const removeItem = useCartStore((state) => state.removeItem);
   const getTotalItems = useCartStore((state) => state.getTotalItems);
+  const addToast = useToastStore((state) => state.addToast);
 
   const onAddToCart = () => {
     if (!product) return;
 
     if (isInCart) {
       removeItem(product.id);
-      alert(`${product?.name}을(를) 장바구니에 제거했습니다!!`);
+      addToast(`${product.name}을(를) 장바구니에서 제거했습니다!`, "info");
     } else {
       addToCart(product, 1);
-      alert(`${product?.name}을(를) 장바구니에 담겼습니다!`);
+      addToast(`${product.name}을(를) 장바구니에 담았습니다!`, "success");
     }
   };
 
