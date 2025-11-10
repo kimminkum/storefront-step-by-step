@@ -34,3 +34,29 @@ export interface PaginatedResponse<T> {
     hasPrev: boolean;
   };
 }
+
+// 주문 관련 타입
+export interface OrderItem {
+  product: Product;
+  quantity: number;
+  price: number; // 주문 당시 가격
+}
+
+export interface ShippingInfo {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  detailAddress: string;
+  zipCode: string;
+  message?: string;
+}
+
+export interface Order {
+  id: string;
+  items: OrderItem[];
+  shippingInfo: ShippingInfo;
+  totalPrice: number;
+  status: "pending" | "confirmed" | "shipping" | "delivered" | "cancelled";
+  createdAt: string;
+}
