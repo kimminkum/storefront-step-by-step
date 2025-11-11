@@ -262,6 +262,21 @@
 
   .product-image-area {
     height: 400px;
+    order: 1;
+  }
+
+  .product-text-area {
+    order: 2;
+  }
+
+  .product-image-container {
+    background: #f3f4f6;
+    border-radius: 12px;
+  }
+
+  .product-image.active {
+    opacity: 1 !important;
+    transform: scale(1) !important;
   }
 
   .product-text-scroll-container {
@@ -282,63 +297,98 @@
 
 @media (max-width: 768px) {
   .product-swiper-wrapper {
-    padding: 40px 20px;
+    padding: 30px 16px;
   }
 
   .product-swiper-content {
-    gap: 30px;
+    gap: 24px;
+    max-width: 100%;
   }
 
   .product-image-area {
-    height: 350px;
-    min-height: 350px;
+    height: 280px;
+    min-height: 280px;
+    order: 1;
+  }
+
+  .product-text-area {
+    order: 2;
   }
 
   .product-image-container {
     position: relative;
     width: 100%;
     height: 100%;
+    background: #f3f4f6;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .product-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+    position: relative !important;
+    width: 90% !important;
+    height: 90% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  .product-image.active {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    display: block !important;
+  }
+
+  .product-image:not(.active) {
+    display: none;
   }
 
   .product-text-scroll-container {
-    min-height: 250px;
+    min-height: 200px;
+  }
+
+  .product-text-area {
+    padding: 0 8px;
+  }
+
+  .product-pagination {
+    gap: 8px;
+  }
+
+  .product-pagination-bar {
+    height: 4px;
   }
 
   .product-text-current h2,
   .product-text-peek h2 {
-    font-size: 24px;
-    margin-bottom: 12px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.3;
   }
 
   .product-text-current p,
   .product-text-peek p {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
   }
 
   .product-text-peek-prev,
   .product-text-peek-next {
-    height: 70px;
+    height: 60px;
   }
 
   .product-navigation {
-    bottom: 15px;
-    left: 15px;
+    bottom: 12px;
+    left: 12px;
+    gap: 8px;
   }
 
   .product-nav-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 }
