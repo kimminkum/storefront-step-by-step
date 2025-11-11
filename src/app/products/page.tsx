@@ -6,6 +6,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useDebounceValue } from "@/lib/debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductCardSkeleton } from "@/components/ui/ProductCardSkeleton";
 import type { ProductFilters, SortOption, SortOrder } from "@/types";
 
 type NavMode = "push" | "replace";
@@ -245,12 +246,6 @@ function ProductsContent() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {isLoading && (
-          <div className="flex flex-col items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-            <div className="text-gray-600">잠시만 기다려주세요...</div>
-          </div>
-        )}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg">
             ❌ 죄송합니다. 오류가 발생했습니다: {String(error)}
@@ -258,10 +253,18 @@ function ProductsContent() {
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {items.map((product) => (
-            <ProductCard key={product.id} product={product}></ProductCard>
-          ))}
-          {!isLoading && items.length === 0 && (
+          {isLoading ? (
+            // Skeleton UI
+            Array.from({ length: 8 }).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))
+          ) : items.length > 0 ? (
+            // 실제 상품 카드
+            items.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            // 검색 결과 없음
             <div className="col-span-full flex flex-col items-center justify-center py-20">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">

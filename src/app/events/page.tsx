@@ -71,19 +71,45 @@ export default function EventsPage() {
             <Link
               key={skill.name}
               href={`/events/${encodeURIComponent(skill.name)}`}
-              className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer animate-slide-up block"
+              className="relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 group cursor-pointer animate-slide-up block overflow-hidden border-2 border-transparent hover:border-blue-200 hover:-translate-y-2"
               style={{ animationDelay: `${index * 30}ms` }}
             >
-              <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">
-                {skill.icon}
+              {/* 배경 그라데이션 효과 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* 콘텐츠 */}
+              <div className="relative z-10">
+                <div className="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  {skill.icon}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  {skill.name}
+                </h3>
+                <p className="text-sm text-gray-600 group-hover:text-gray-700">
+                  {skill.desc}
+                </p>
+
+                {/* 하단 화살표 */}
+                <div className="mt-4 flex items-center gap-2 text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1">
+                  <span className="text-sm font-semibold">데모 보기</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                {skill.name}
-              </h3>
-              <p className="text-sm text-gray-600">{skill.desc}</p>
-              <div className="mt-4 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity text-sm font-semibold">
-                데모 보기 →
-              </div>
+
+              {/* 코너 장식 */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
           ))}
         </div>

@@ -120,9 +120,9 @@ export default function CartPage() {
                   </div>
 
                   {/* 수량 조절 & 삭제 */}
-                  <div className="flex flex-col items-end gap-2">
+                  <div className="flex flex-col items-end gap-3">
                     {/* 수량 조절 */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 bg-gray-100 rounded-full p-1">
                       <button
                         onClick={() =>
                           handleUpdateQuantity(
@@ -130,11 +130,24 @@ export default function CartPage() {
                             item.quantity - 1
                           )
                         }
-                        className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors font-semibold"
+                        disabled={item.quantity <= 1}
+                        className="w-9 h-9 rounded-full bg-white hover:bg-blue-50 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center transition-all shadow-sm hover:shadow disabled:shadow-none group"
                       >
-                        -
+                        <svg
+                          className="w-4 h-4 text-gray-700 group-hover:text-blue-600 group-disabled:text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          strokeWidth={3}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M20 12H4"
+                          />
+                        </svg>
                       </button>
-                      <span className="w-10 text-center font-semibold text-lg">
+                      <span className="w-12 text-center font-bold text-lg text-gray-900">
                         {item.quantity}
                       </span>
                       <button
@@ -144,9 +157,21 @@ export default function CartPage() {
                             item.quantity + 1
                           )
                         }
-                        className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors font-semibold"
+                        className="w-9 h-9 rounded-full bg-white hover:bg-blue-50 flex items-center justify-center transition-all shadow-sm hover:shadow group"
                       >
-                        +
+                        <svg
+                          className="w-4 h-4 text-gray-700 group-hover:text-blue-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          strokeWidth={3}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 4v16m8-8H4"
+                          />
+                        </svg>
                       </button>
                     </div>
 
@@ -155,8 +180,21 @@ export default function CartPage() {
                       onClick={() =>
                         handleRemoveItem(item.product.id, item.product.name)
                       }
-                      className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors"
+                      className="flex items-center gap-1 text-red-600 hover:text-red-800 text-sm font-semibold transition-colors group"
                     >
+                      <svg
+                        className="w-4 h-4 group-hover:scale-110 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
                       삭제
                     </button>
                   </div>

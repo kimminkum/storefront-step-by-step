@@ -97,24 +97,27 @@ export default function Home() {
       {/* Tech Stack Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
             기술 스택
           </h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            최신 기술 스택으로 구현한 현대적인 E-Commerce 플랫폼
+          </p>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "Next.js 15",
-              "React 19",
-              "TypeScript",
-              "Tailwind CSS",
-              "Zustand",
-              "React Query"
+              { name: "Next.js 15", color: "from-black to-gray-800" },
+              { name: "React 19", color: "from-blue-500 to-cyan-500" },
+              { name: "TypeScript", color: "from-blue-600 to-blue-700" },
+              { name: "Tailwind CSS", color: "from-cyan-500 to-blue-500" },
+              { name: "Zustand", color: "from-purple-600 to-pink-600" },
+              { name: "React Query", color: "from-red-500 to-orange-500" }
             ].map((tech, index) => (
               <div
-                key={tech}
-                className="px-6 py-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all hover:scale-110 font-semibold text-gray-700 animate-fade-in"
+                key={tech.name}
+                className={`px-6 py-3 bg-gradient-to-r ${tech.color} text-white rounded-full shadow-md hover:shadow-lg transition-all hover:scale-110 font-semibold animate-fade-in`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                {tech}
+                {tech.name}
               </div>
             ))}
           </div>
