@@ -290,22 +290,45 @@
   }
 
   .product-image-area {
-    height: 300px;
+    height: 350px;
+    min-height: 350px;
+  }
+
+  .product-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .product-text-scroll-container {
+    min-height: 250px;
   }
 
   .product-text-current h2,
   .product-text-peek h2 {
-    font-size: 28px;
+    font-size: 24px;
+    margin-bottom: 12px;
   }
 
   .product-text-current p,
   .product-text-peek p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .product-text-peek-prev,
   .product-text-peek-next {
-    height: 80px;
+    height: 70px;
   }
 
   .product-navigation {

@@ -64,13 +64,13 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
             🛒 장바구니 ({getTotalItems()}개)
           </h1>
           <button
             onClick={() => setShowClearConfirm(true)}
-            className="text-red-600 hover:text-red-800 transition-colors font-medium"
+            className="text-red-600 hover:text-red-800 transition-colors font-medium text-sm sm:text-base"
           >
             전체 삭제
           </button>
@@ -82,45 +82,47 @@ export default function CartPage() {
             {items.map((item, index) => (
               <div
                 key={item.product.id}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 animate-slide-up"
+                className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-all duration-300 animate-slide-up"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <div className="flex gap-4">
-                  {/* 제품 이미지 */}
-                  <Link
-                    href={`/products/${item.product.id}`}
-                    className="w-24 h-24 relative flex-shrink-0 group"
-                  >
-                    <Image
-                      src={item.product.image}
-                      alt={item.product.name}
-                      fill
-                      className="object-cover rounded-lg group-hover:scale-105 transition-transform"
-                      sizes="96px"
-                      unoptimized
-                    />
-                  </Link>
-
-                  {/* 제품 정보 */}
-                  <div className="flex-1">
-                    <Link href={`/products/${item.product.id}`}>
-                      <h3 className="font-semibold text-lg text-gray-900 mb-2 hover:text-blue-600 transition-colors">
-                        {item.product.name}
-                      </h3>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  {/* 제품 이미지 & 정보 */}
+                  <div className="flex gap-3 sm:gap-4 flex-1">
+                    <Link
+                      href={`/products/${item.product.id}`}
+                      className="w-20 h-20 sm:w-24 sm:h-24 relative flex-shrink-0 group"
+                    >
+                      <Image
+                        src={item.product.image}
+                        alt={item.product.name}
+                        fill
+                        className="object-cover rounded-lg group-hover:scale-105 transition-transform"
+                        sizes="(max-width: 640px) 80px, 96px"
+                        unoptimized
+                      />
                     </Link>
-                    <p className="text-gray-600 mb-2 text-sm">
-                      {item.product.category}
-                    </p>
-                    <p className="text-xl font-bold text-green-600">
-                      {formatKRW(item.product.price)}
-                    </p>
-                    <p className="text-sm text-gray-500 mt-1">
-                      소계: {formatKRW(item.product.price * item.quantity)}
-                    </p>
+
+                    {/* 제품 정보 */}
+                    <div className="flex-1 min-w-0">
+                      <Link href={`/products/${item.product.id}`}>
+                        <h3 className="font-semibold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2 hover:text-blue-600 transition-colors line-clamp-2">
+                          {item.product.name}
+                        </h3>
+                      </Link>
+                      <p className="text-gray-600 mb-1 sm:mb-2 text-xs sm:text-sm">
+                        {item.product.category}
+                      </p>
+                      <p className="text-lg sm:text-xl font-bold text-green-600">
+                        {formatKRW(item.product.price)}
+                      </p>
+                      <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                        소계: {formatKRW(item.product.price * item.quantity)}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* 수량 조절 & 삭제 */}
-                  <div className="flex flex-col items-end gap-3">
+                  {/* 수량 조절 & 삭제 - 모바일에서는 하단 배치 */}
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                     {/* 수량 조절 */}
                     <div className="flex items-center gap-1 bg-gray-100 rounded-full p-1">
                       <button
@@ -131,10 +133,10 @@ export default function CartPage() {
                           )
                         }
                         disabled={item.quantity <= 1}
-                        className="w-9 h-9 rounded-full bg-white hover:bg-blue-50 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center transition-all shadow-sm hover:shadow disabled:shadow-none group"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-blue-50 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center transition-all shadow-sm hover:shadow disabled:shadow-none group"
                       >
                         <svg
-                          className="w-4 h-4 text-gray-700 group-hover:text-blue-600 group-disabled:text-gray-400"
+                          className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700 group-hover:text-blue-600 group-disabled:text-gray-400"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -147,7 +149,7 @@ export default function CartPage() {
                           />
                         </svg>
                       </button>
-                      <span className="w-12 text-center font-bold text-lg text-gray-900">
+                      <span className="w-10 sm:w-12 text-center font-bold text-base sm:text-lg text-gray-900">
                         {item.quantity}
                       </span>
                       <button
@@ -157,10 +159,10 @@ export default function CartPage() {
                             item.quantity + 1
                           )
                         }
-                        className="w-9 h-9 rounded-full bg-white hover:bg-blue-50 flex items-center justify-center transition-all shadow-sm hover:shadow group"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-blue-50 flex items-center justify-center transition-all shadow-sm hover:shadow group"
                       >
                         <svg
-                          className="w-4 h-4 text-gray-700 group-hover:text-blue-600"
+                          className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700 group-hover:text-blue-600"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -180,10 +182,10 @@ export default function CartPage() {
                       onClick={() =>
                         handleRemoveItem(item.product.id, item.product.name)
                       }
-                      className="flex items-center gap-1 text-red-600 hover:text-red-800 text-sm font-semibold transition-colors group"
+                      className="flex items-center gap-1 text-red-600 hover:text-red-800 text-xs sm:text-sm font-semibold transition-colors group px-2 py-1 rounded hover:bg-red-50"
                     >
                       <svg
-                        className="w-4 h-4 group-hover:scale-110 transition-transform"
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

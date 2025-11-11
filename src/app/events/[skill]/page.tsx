@@ -49,45 +49,45 @@ export default function SkillDetailPage({ params }: PageProps) {
   const swiperSlides = [
     <div
       key="1"
-      className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 flex flex-col items-center justify-center text-white"
+      className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-6xl font-bold mb-4">Slide 1</h2>
-      <p className="text-xl">Gauge Pagination으로 진행도를 확인하세요</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 1</h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">Gauge Pagination으로 진행도를 확인하세요</p>
     </div>,
     <div
       key="2"
-      className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 flex flex-col items-center justify-center text-white"
+      className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-6xl font-bold mb-4">Slide 2</h2>
-      <p className="text-xl">자동으로 슬라이드가 전환됩니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 2</h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">자동으로 슬라이드가 전환됩니다</p>
     </div>,
     <div
       key="3"
-      className="w-full h-full bg-gradient-to-r from-pink-500 to-red-500 flex flex-col items-center justify-center text-white"
+      className="w-full h-full bg-gradient-to-r from-pink-500 to-red-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-6xl font-bold mb-4">Slide 3</h2>
-      <p className="text-xl">다양한 Pagination 타입을 지원합니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 3</h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">다양한 Pagination 타입을 지원합니다</p>
     </div>,
     <div
       key="4"
-      className="w-full h-full bg-gradient-to-r from-red-500 to-orange-500 flex flex-col items-center justify-center text-white"
+      className="w-full h-full bg-gradient-to-r from-red-500 to-orange-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-6xl font-bold mb-4">Slide 4</h2>
-      <p className="text-xl">커스터마이징이 가능합니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 4</h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">커스터마이징이 가능합니다</p>
     </div>
   ];
 
   const skillDemos: Record<string, React.ReactElement> = {
     Swiper: (
       <div className="space-y-8">
-        <div className="bg-white rounded-xl p-8 shadow-lg">
-          <h2 className="text-2xl font-bold mb-6">
+        <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">
             Swiper 데모 - Gauge Pagination + Remote Control
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
             게이지가 채워지면서 자동으로 다음 슬라이드로 전환됩니다
           </p>
-          <div className="h-96">
+          <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
               paginationType="gauge"
@@ -100,9 +100,9 @@ export default function SkillDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-8 shadow-lg">
-          <h2 className="text-2xl font-bold mb-6">Swiper 데모 - Dots</h2>
-          <div className="h-96">
+        <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">Swiper 데모 - Dots</h2>
+          <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
               paginationType="dots"
@@ -113,9 +113,9 @@ export default function SkillDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-8 shadow-lg">
-          <h2 className="text-2xl font-bold mb-6">Swiper 데모 - Progressbar</h2>
-          <div className="h-96">
+        <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">Swiper 데모 - Progressbar</h2>
+          <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
               paginationType="progressbar"
@@ -126,14 +126,14 @@ export default function SkillDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="bg-gray-900 rounded-xl p-8 shadow-lg">
-          <h2 className="text-2xl font-bold mb-6 text-white">
+        <div className="bg-gray-900 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6 text-white">
             Swiper 데모 - 커스텀 마우스 커서
           </h2>
-          <p className="text-gray-300 mb-4">
+          <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4">
             마우스를 올려보세요! 따라다니는 커스텀 커서가 나타납니다
           </p>
-          <div className="h-96">
+          <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
               paginationType="dots"

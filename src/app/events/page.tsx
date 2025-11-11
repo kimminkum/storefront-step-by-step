@@ -31,14 +31,14 @@ export default function EventsPage() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* 헤더 */}
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-12 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
             🎨 Publisher Skills Showcase
           </h1>
-          <p className="text-xl text-gray-600 mb-2">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-2 px-4">
             퍼블리셔를 위한 재사용 가능한 컴포넌트 라이브러리
           </p>
-          <p className="text-gray-500">
+          <p className="text-sm sm:text-base text-gray-500 px-4">
             다양한 인터랙션 효과와 애니메이션 기술을 구현할 수 있습니다
           </p>
         </div>
