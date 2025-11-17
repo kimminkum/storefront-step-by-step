@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cartStore";
-import { useOrderStore } from "@/stores/orderStore";
-import { useToastStore } from "@/stores/toastStore";
+import { useCreateOrder } from "@/hooks/useCreateOrder";
 import { formatKRW } from "@/lib/money";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,9 +11,8 @@ import type { ShippingInfo } from "@/types";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, getTotalPrice, clearCart } = useCartStore();
-  const createOrder = useOrderStore((state) => state.createOrder);
-  const addToast = useToastStore((state) => state.addToast);
+  const { items, getTotalPrice } = useCartStore();
+  const createOrderMutation = useCreateOrder();
 
   const [shippingInfo, setShippingInfo] = useState<ShippingInfo>({
     name: "",
@@ -25,8 +23,6 @@ export default function CheckoutPage() {
     zipCode: "",
     message: ""
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // 장바구니가 비어있으면 리다이렉트
   if (items.length === 0) {
@@ -58,7 +54,6 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
     // 유효성 검사
     if (
@@ -68,26 +63,32 @@ export default function CheckoutPage() {
       !shippingInfo.address ||
       !shippingInfo.zipCode
     ) {
-      addToast("모든 필수 항목을 입력해주세요", "error");
-      setIsSubmitting(false);
       return;
     }
 
-    // 주문 생성
+    // 주문 아이템 준비
     const orderItems = items.map((item) => ({
       product: item.product,
       quantity: item.quantity,
       price: item.product.price
     }));
 
-    const order = createOrder(orderItems, shippingInfo, getTotalPrice());
-
-    // 장바구니 비우기
-    clearCart();
-
-    // 주문 완료 페이지로 이동
-    addToast("주문이 완료되었습니다!", "success");
-    router.push(`/checkout/success?orderId=${order.id}`);
+    // useMutation을 사용한 주문 생성
+    // Optimistic Updates가 자동으로 적용됩니다
+    createOrderMutation.mutate(
+      {
+        items: orderItems,
+        shippingInfo,
+        totalPrice: getTotalPrice()
+      },
+      {
+        onSuccess: (order) => {
+          // 성공 시 주문 완료 페이지로 이동
+          router.push(`/checkout/success?orderId=${order.id}`);
+        }
+        // 에러 처리는 useCreateOrder hook에서 자동으로 처리됩니다
+      }
+    );
   };
 
   return (
@@ -270,10 +271,10 @@ export default function CheckoutPage() {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={createOrderMutation.isPending}
                   className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? "처리 중..." : "결제하기"}
+                  {createOrderMutation.isPending ? "처리 중..." : "결제하기"}
                 </button>
 
                 <Link
