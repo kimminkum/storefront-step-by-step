@@ -26,7 +26,6 @@
 .product-swiper-content {
   display: flex;
   width: 100%;
-  max-width: 1400px;
   gap: 80px;
   align-items: stretch;
   height: 700px;

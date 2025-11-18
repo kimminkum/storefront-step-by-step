@@ -19,7 +19,7 @@
   flex-direction: column;
   gap: 40px;
   padding: 40px;
-  max-width: 1200px;
+  width: 100%;
 }
 
 .text-color-line {
