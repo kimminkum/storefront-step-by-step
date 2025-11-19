@@ -93,7 +93,8 @@ export const TextEffect: React.FC<TextEffectProps> = ({
       } ${className}`}
       style={
         {
-          "--text-effect-duration": `${duration}ms`
+          "--text-effect-duration": `${duration}ms`,
+          "--text-effect-delay": `${delay}ms`
         } as React.CSSProperties
       }
     >

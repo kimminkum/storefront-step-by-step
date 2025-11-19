@@ -34,6 +34,10 @@ export default {
         "slide-up": "slide-up 0.4s ease-out",
         "scale-in": "scale-in 0.2s ease-out",
         blob: "blob 7s infinite"
+      },
+      animationDelay: {
+        "2000": "2000ms",
+        "4000": "4000ms"
       }
     }
   },

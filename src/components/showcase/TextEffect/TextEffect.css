@@ -16,10 +16,10 @@
 .text-effect-reveal .text-effect-full {
   background: linear-gradient(
     to right,
-    var(--reveal-start-color, #999) 0%,
-    var(--reveal-start-color, #999) 50%,
+    var(--reveal-end-color, #000) 0%,
     var(--reveal-end-color, #000) 50%,
-    var(--reveal-end-color, #000) 100%
+    var(--reveal-start-color, #999) 50%,
+    var(--reveal-start-color, #999) 100%
   );
   background-size: 200% 100%;
   background-position: 100% 0;
@@ -31,6 +31,7 @@
 
 .text-effect-reveal.animate .text-effect-full {
   animation: revealColor var(--text-effect-duration, 2000ms) ease-out forwards;
+  animation-delay: var(--text-effect-delay, 0ms);
 }
 
 @keyframes revealColor {
