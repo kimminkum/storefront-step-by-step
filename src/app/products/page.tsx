@@ -364,37 +364,67 @@ function ProductsContent() {
               <label htmlFor="category-filter" className="sr-only">
                 카테고리 필터
               </label>
-              <select
-                id="category-filter"
-                value={filters.category ?? ""}
-                onChange={onCategoryChange}
-                disabled={catLoading}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
-                aria-label="카테고리 선택"
-              >
-                <option value="">📦 전체 카테고리</option>
-                {(categories ?? []).map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  id="category-filter"
+                  value={filters.category ?? ""}
+                  onChange={onCategoryChange}
+                  disabled={catLoading}
+                  className="appearance-none pr-10 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed bg-white"
+                  aria-label="카테고리 선택"
+                >
+                  <option value="">📦 전체 카테고리</option>
+                  {(categories ?? []).map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </div>
 
               <label htmlFor="sort-filter" className="sr-only">
                 정렬 기준
               </label>
-              <select
-                id="sort-filter"
-                value={filters.sortBy ?? "createdAt"}
-                onChange={onSortByChange}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                aria-label="정렬 기준 선택"
-              >
-                <option value="createdAt">🕒 최신순</option>
-                <option value="name">🔤 이름</option>
-                <option value="price">💰 가격</option>
-                <option value="rating">⭐ 평점</option>
-              </select>
+              <div className="relative">
+                <select
+                  id="sort-filter"
+                  value={filters.sortBy ?? "createdAt"}
+                  onChange={onSortByChange}
+                  className="appearance-none pr-10 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  aria-label="정렬 기준 선택"
+                >
+                  <option value="createdAt">🕒 최신순</option>
+                  <option value="name">🔤 이름</option>
+                  <option value="price">💰 가격</option>
+                  <option value="rating">⭐ 평점</option>
+                </select>
+                <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </div>
 
               <button
                 onClick={onToggleOrder}
