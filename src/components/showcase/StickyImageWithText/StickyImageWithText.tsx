@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { StickyImageWithTextProps } from "@/types/showcase";
 import "./StickyImageWithText.css";
 
@@ -14,7 +15,13 @@ export const StickyImageWithText: React.FC<StickyImageWithTextProps> = ({
       className={`sticky-image-with-text sticky-image-${imagePosition} ${className}`}
     >
       <div className="sticky-image-container">
-        <img src={imageSrc} alt={imageAlt} className="sticky-image" />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          className="sticky-image"
+          unoptimized
+        />
       </div>
       <div className="sticky-text-container">
         {textSections.map((section, index) => (
@@ -26,4 +33,3 @@ export const StickyImageWithText: React.FC<StickyImageWithTextProps> = ({
     </div>
   );
 };
-

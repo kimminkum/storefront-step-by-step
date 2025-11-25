@@ -2,6 +2,7 @@
 
 import React, { use, useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Swiper } from "@/components/showcase/Swiper";
 import { ScrollProgress } from "@/components/showcase/ScrollProgress";
 import { AOS } from "@/components/showcase/AOS";
@@ -51,29 +52,45 @@ export default function SkillDetailPage({ params }: PageProps) {
       key="1"
       className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 1</h2>
-      <p className="text-sm sm:text-base md:text-xl text-center">Gauge Pagination으로 진행도를 확인하세요</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
+        Slide 1
+      </h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">
+        Gauge Pagination으로 진행도를 확인하세요
+      </p>
     </div>,
     <div
       key="2"
       className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 2</h2>
-      <p className="text-sm sm:text-base md:text-xl text-center">자동으로 슬라이드가 전환됩니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
+        Slide 2
+      </h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">
+        자동으로 슬라이드가 전환됩니다
+      </p>
     </div>,
     <div
       key="3"
       className="w-full h-full bg-gradient-to-r from-pink-500 to-red-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 3</h2>
-      <p className="text-sm sm:text-base md:text-xl text-center">다양한 Pagination 타입을 지원합니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
+        Slide 3
+      </h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">
+        다양한 Pagination 타입을 지원합니다
+      </p>
     </div>,
     <div
       key="4"
       className="w-full h-full bg-gradient-to-r from-red-500 to-orange-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">Slide 4</h2>
-      <p className="text-sm sm:text-base md:text-xl text-center">커스터마이징이 가능합니다</p>
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4">
+        Slide 4
+      </h2>
+      <p className="text-sm sm:text-base md:text-xl text-center">
+        커스터마이징이 가능합니다
+      </p>
     </div>
   ];
 
@@ -101,7 +118,9 @@ export default function SkillDetailPage({ params }: PageProps) {
         </div>
 
         <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">Swiper 데모 - Dots</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">
+            Swiper 데모 - Dots
+          </h2>
           <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
@@ -114,7 +133,9 @@ export default function SkillDetailPage({ params }: PageProps) {
         </div>
 
         <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-lg">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">Swiper 데모 - Progressbar</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6">
+            Swiper 데모 - Progressbar
+          </h2>
           <div className="h-64 sm:h-80 md:h-96">
             <Swiper
               slides={swiperSlides}
@@ -482,11 +503,13 @@ export default function SkillDetailPage({ params }: PageProps) {
             이미지는 고정되고 텍스트만 스크롤됩니다
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="sticky top-8 h-96">
-              <img
+            <div className="sticky top-8 h-96 relative">
+              <Image
                 src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600"
                 alt="Mountain"
-                className="w-full h-full object-cover rounded-xl shadow-lg"
+                fill
+                className="object-cover rounded-xl shadow-lg"
+                unoptimized
               />
             </div>
             <div className="space-y-12">

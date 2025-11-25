@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import { Header } from "@/components/Header";
 import { ToastContainer } from "@/components/ui/ToastContainer";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: {
@@ -52,14 +53,19 @@ export default function RootLayout({
   return (
     <html lang="ko" translate="no" suppressHydrationWarning>
       <body>
-        <Providers>
-          <Header />
-          <main>{children}</main>
-          <footer className="border-t mt-16 py-6 text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Storefront
-          </footer>
-          <ToastContainer />
-        </Providers>
+        <ErrorBoundary>
+          <Providers>
+            <Header />
+            <main role="main">{children}</main>
+            <footer
+              className="border-t mt-16 py-6 text-center text-sm text-gray-500"
+              role="contentinfo"
+            >
+              © {new Date().getFullYear()} Storefront
+            </footer>
+            <ToastContainer />
+          </Providers>
+        </ErrorBoundary>
       </body>
     </html>
   );

@@ -17,9 +17,6 @@ export default function ProductDetailPage({ params }: PageProps) {
   const isInCart = cartItems.some(
     (item) => item.product.id === resolvedParams.id
   );
-  const cartItem = cartItems.find(
-    (item) => item.product.id === resolvedParams.id
-  );
 
   const { data: product, isLoading, error } = useProduct(resolvedParams.id);
 

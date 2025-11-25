@@ -44,26 +44,50 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const isOutOfStock = product.stock === 0;
 
   return (
-    <Link href={`/products/${product.id}`} className="block">
-      <div className="bg-white border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow group">
-        <div className="relative aspect-square bg-gray-100">
-          <div className="absolute top-2 left-2 z-10 flex flex-col gap-2">
+    <Link
+      href={`/products/${product.id}`}
+      className="block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
+      aria-label={`${product.name} 상세 페이지로 이동`}
+    >
+      <article className="bg-white border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow group">
+        <div
+          className="relative aspect-square bg-gray-100"
+          aria-label="상품 이미지"
+        >
+          <div
+            className="absolute top-2 left-2 z-10 flex flex-col gap-2"
+            role="status"
+            aria-live="polite"
+          >
             {isNew() && <Badge variant="new">New</Badge>}
-            {isLowStock && <Badge variant="warning">재고 부족</Badge>}
-            {isOutOfStock && <Badge variant="danger">품절</Badge>}
+            {isLowStock && (
+              <Badge variant="warning" aria-label="재고 부족">
+                재고 부족
+              </Badge>
+            )}
+            {isOutOfStock && (
+              <Badge variant="danger" aria-label="품절">
+                품절
+              </Badge>
+            )}
           </div>
 
           {/* 장바구니 담기 버튼 */}
-          <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
             <button
               onClick={handleAddToCart}
               disabled={isOutOfStock}
-              className={`w-10 h-10 rounded-full shadow-md flex items-center justify-center transition-colors ${
+              className={`w-10 h-10 rounded-full shadow-md flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 isInCart
                   ? "bg-green-500 hover:bg-green-600"
                   : "bg-white hover:bg-blue-50"
               } disabled:bg-gray-100 disabled:cursor-not-allowed`}
-              title={isInCart ? "장바구니에서 제거" : "장바구니에 담기"}
+              aria-label={
+                isInCart
+                  ? `${product.name}을 장바구니에서 제거`
+                  : `${product.name}을 장바구니에 담기`
+              }
+              aria-pressed={isInCart}
             >
               {isInCart ? (
                 // 체크 아이콘
@@ -119,18 +143,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
         <div className="p-4 space-y-2">
-          <p className="text-xs text-gray-500 uppercase">{product.category}</p>
+          <p className="text-xs text-gray-500 uppercase" aria-label="카테고리">
+            {product.category}
+          </p>
           <h3 className="font-semibold text-lg">{product.name}</h3>
           <Rating
             rating={product.rating}
             reviewCount={product.reviewCount}
+            aria-label={`평점 ${product.rating}점, 리뷰 ${product.reviewCount}개`}
           ></Rating>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="text-xl font-bold text-gray-900" aria-label="가격">
             {formatKRW(product.price)}
           </p>
-          <p className="text-sm text-gray-600">재고: {product.stock}개</p>
+          <p className="text-sm text-gray-600" aria-label="재고 수량">
+            재고: {product.stock}개
+          </p>
         </div>
-      </div>
+      </article>
     </Link>
   );
 };

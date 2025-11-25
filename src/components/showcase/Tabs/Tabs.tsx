@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { TabsProps } from "@/types/showcase";
 import "./Tabs.css";
 
@@ -17,13 +17,7 @@ export const Tabs: React.FC<TabsProps> = ({
   const [indicatorStyle, setIndicatorStyle] = useState({});
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
-  useEffect(() => {
-    if (variant === "underline" || variant === "fill") {
-      updateIndicator();
-    }
-  }, [activeIndex, variant]);
-
-  const updateIndicator = () => {
+  const updateIndicator = useCallback(() => {
     const activeTab = tabsRef.current[activeIndex];
     if (activeTab) {
       if (orientation === "horizontal") {
@@ -38,7 +32,13 @@ export const Tabs: React.FC<TabsProps> = ({
         });
       }
     }
-  };
+  }, [activeIndex, orientation]);
+
+  useEffect(() => {
+    if (variant === "underline" || variant === "fill") {
+      updateIndicator();
+    }
+  }, [activeIndex, variant, updateIndicator]);
 
   const handleTabClick = (index: number) => {
     setActiveIndex(index);

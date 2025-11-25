@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { ProductSwiperProps } from "@/types/showcase";
 import "./ProductSwiper.css";
 
@@ -71,13 +72,15 @@ export const ProductSwiper: React.FC<ProductSwiperProps> = ({
           <div className="product-image-area">
             <div className="product-image-container">
               {slides.map((slide, index) => (
-                <img
+                <Image
                   key={index}
                   src={slide.image}
                   alt={slide.title}
+                  fill
                   className={`product-image ${
                     index === currentIndex ? "active" : ""
                   }`}
+                  unoptimized
                 />
               ))}
             </div>

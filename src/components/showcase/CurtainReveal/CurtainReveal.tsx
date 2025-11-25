@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { CurtainRevealProps } from "@/types/showcase";
 import { useIntersectionObserver } from "@/hooks/showcase/useIntersectionObserver";
 import "./CurtainReveal.css";
@@ -23,7 +24,13 @@ export const CurtainReveal: React.FC<CurtainRevealProps> = ({
         hasIntersected ? "revealed" : ""
       } ${className}`}
     >
-      <img src={imageSrc} alt={imageAlt} className="curtain-image" />
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        fill
+        className="curtain-image"
+        unoptimized
+      />
       <div
         className="curtain curtain-left"
         style={{ background: curtainColor }}

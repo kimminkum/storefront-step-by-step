@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { ImageComparisonProps } from "@/types/showcase";
 import "./ImageComparison.css";
 
@@ -25,10 +26,6 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
 
   const handleMouseDown = () => {
     setIsDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -63,7 +60,13 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
       onTouchMove={handleTouchMove}
     >
       <div className="comparison-image comparison-before">
-        <img src={beforeImage} alt={beforeLabel} />
+        <Image
+          src={beforeImage}
+          alt={beforeLabel}
+          fill
+          className="object-cover"
+          unoptimized
+        />
         <span className="comparison-label">{beforeLabel}</span>
       </div>
 
@@ -71,7 +74,13 @@ export const ImageComparison: React.FC<ImageComparisonProps> = ({
         className="comparison-image comparison-after"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img src={afterImage} alt={afterLabel} />
+        <Image
+          src={afterImage}
+          alt={afterLabel}
+          fill
+          className="object-cover"
+          unoptimized
+        />
         <span className="comparison-label">{afterLabel}</span>
       </div>
 

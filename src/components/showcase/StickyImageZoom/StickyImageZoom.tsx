@@ -10,14 +10,12 @@ export const StickyImageZoom: React.FC<ImageZoomScrollProps> = ({
   overlayContent,
   showDimOverlay = true,
   dimOpacity = 0.6,
-  className = "",
-  textRevealDelay = 500
+  className = ""
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(initialScale);
   const [overlayOpacity, setOverlayOpacity] = useState(0);
   const [showText, setShowText] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -38,7 +36,6 @@ export const StickyImageZoom: React.FC<ImageZoomScrollProps> = ({
             initialScale + (finalScale - initialScale) * scaleProgress;
           setScale(newScale);
           setShowText(false);
-          setIsComplete(false);
         } else if (progress <= 0.85) {
           setScale(finalScale);
           const dimProgress = (progress - 0.7) / 0.15;
@@ -54,13 +51,11 @@ export const StickyImageZoom: React.FC<ImageZoomScrollProps> = ({
             setOverlayOpacity(dimOpacity);
           }
           setShowText(true);
-          setIsComplete(true);
         }
       } else if (rect.top > 0) {
         setScale(initialScale);
         setOverlayOpacity(0);
         setShowText(false);
-        setIsComplete(false);
       }
     };
 

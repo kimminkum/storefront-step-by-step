@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { CurtainRevealProps } from "@/types/showcase";
 import "./CurtainRevealScroll.css";
 
@@ -19,8 +20,6 @@ export const CurtainRevealScroll: React.FC<CurtainRevealProps> = ({
     const handleScroll = () => {
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-
-      const visibleHeight = windowHeight * openThreshold;
 
       if (rect.top <= windowHeight && rect.bottom >= 0) {
         const scrollProgress = 1 - rect.top / windowHeight;
@@ -44,7 +43,13 @@ export const CurtainRevealScroll: React.FC<CurtainRevealProps> = ({
 
   return (
     <div ref={containerRef} className={`curtain-reveal-scroll ${className}`}>
-      <img src={imageSrc} alt={imageAlt} className="curtain-image" />
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        fill
+        className="curtain-image"
+        unoptimized
+      />
       <div
         className="curtain curtain-left"
         style={{
