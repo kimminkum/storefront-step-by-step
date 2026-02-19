@@ -14,7 +14,7 @@ export const Header = () => {
       role="banner"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-15">
           {/* 로고 */}
           <Link
             href="/"
@@ -29,7 +29,7 @@ export const Header = () => {
 
           {/* 네비게이션 */}
           <nav
-            className="flex items-center gap-6"
+            className="flex items-center gap-4"
             role="navigation"
             aria-label="메인 네비게이션"
           >
