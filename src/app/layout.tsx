@@ -52,20 +52,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" translate="no" suppressHydrationWarning>
-      <body>
-        <ErrorBoundary>
-          <Providers>
-            <Header />
-            <main role="main">{children}</main>
-            <footer
-              className="border-t mt-16 py-6 text-center text-sm text-gray-500"
-              role="contentinfo"
-            >
-              © {new Date().getFullYear()} Storefront
-            </footer>
-            <ToastContainer />
-          </Providers>
-        </ErrorBoundary>
+      <body className="overflow-x-hidden">
+        <div className="min-h-screen flex flex-col w-full max-w-[100vw] overflow-x-hidden">
+          <ErrorBoundary>
+            <Providers>
+              <Header />
+              <main role="main" className="flex-1 w-full min-w-0 overflow-x-hidden">
+                {children}
+              </main>
+              <footer
+                className="border-t mt-16 py-6 text-center text-sm text-gray-500"
+                role="contentinfo"
+              >
+                © {new Date().getFullYear()} Storefront
+              </footer>
+              <ToastContainer />
+            </Providers>
+          </ErrorBoundary>
+        </div>
       </body>
     </html>
   );

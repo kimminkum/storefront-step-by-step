@@ -4,6 +4,23 @@
   color-scheme: light;
 }
 
+/* 모바일 가로 스크롤/여백 방지 - 루트에서 강제 클리핑 */
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+}
+
 .animation-delay-2000 {
   animation-delay: 2000ms;
 }

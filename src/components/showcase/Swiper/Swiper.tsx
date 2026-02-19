@@ -294,7 +294,7 @@ export const Swiper: React.FC<SwiperProps> = ({
           >
             ⏭
           </button>
-          <div className="remote-counter">
+          <div className="remote-counter whitespace-nowrap">
             {currentIndex + 1} / {totalSlides}
           </div>
         </div>

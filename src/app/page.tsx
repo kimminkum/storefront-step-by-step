@@ -29,10 +29,10 @@ export default function Home() {
       key="1"
       className="w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">
+      <h2 className="text-3xl md:text-5xl font-bold mb-16">
         E-Commerce Platform
       </h2>
-      <p className="text-xl md:text-2xl text-center max-w-2xl">
+      <p className="text-l md:text-2xl text-center max-w-2xl">
         Next.js 15와 React 19로 구현한 현대적인 쇼핑몰
       </p>
     </div>,
@@ -40,8 +40,8 @@ export default function Home() {
       key="2"
       className="w-full h-full bg-gradient-to-br from-green-500 via-teal-500 to-cyan-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">Publisher Skills</h2>
-      <p className="text-xl md:text-2xl text-center max-w-2xl">
+      <h2 className="text-3xl md:text-5xl font-bold mb-16">Publisher Skills</h2>
+      <p className="text-l md:text-2xl text-center max-w-2xl">
         23가지 인터랙티브 컴포넌트 라이브러리
       </p>
     </div>,
@@ -49,8 +49,8 @@ export default function Home() {
       key="3"
       className="w-full h-full bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex flex-col items-center justify-center text-white px-4"
     >
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">Modern UI/UX</h2>
-      <p className="text-xl md:text-2xl text-center max-w-2xl">
+      <h2 className="text-3xl md:text-5xl font-bold mb-16">Modern UI/UX</h2>
+      <p className="text-l md:text-2xl text-center max-w-2xl">
         반응형 디자인과 부드러운 애니메이션
       </p>
     </div>
@@ -117,7 +117,7 @@ export default function Home() {
 
   // 프로젝트 섹션 아이템
   const projectItems = projects.map((project, index) => (
-    <div key={index} className="min-w-[400px] md:min-w-[500px]">
+    <div key={index} className="w-full min-w-0 max-w-full md:min-w-[500px]">
       <Card3DHover>
         <div
           className={`bg-gradient-to-br ${project.gradient} rounded-2xl p-8 text-white h-full shadow-xl`}
@@ -140,7 +140,7 @@ export default function Home() {
   ));
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* 스크롤 진행 바 */}
       <ScrollProgress position="top" height={4} color="#3b82f6" />
 
