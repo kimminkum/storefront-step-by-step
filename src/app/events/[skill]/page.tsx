@@ -1034,21 +1034,21 @@ export default function SkillDetailPage({ params }: PageProps) {
     ),
 
     "Scroll Snap": (
-      <div className="space-y-8">
-        <div className="bg-white rounded-xl p-8 shadow-lg">
+      <div className="space-y-8 w-full flex flex-col items-center">
+        <div className="bg-white rounded-xl p-4 sm:p-8 shadow-lg w-full max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">Scroll Snap 데모</h2>
           <p className="text-gray-600 mb-4">
             스크롤 시 자동으로 섹션에 스냅됩니다 (아래 박스 안에서
             스크롤해보세요)
           </p>
           <div
-            className="h-[600px] overflow-y-scroll border-4 border-gray-300 rounded-xl"
+            className="h-[600px] overflow-y-scroll border-4 border-gray-300 rounded-xl w-full"
             style={{ scrollSnapType: "y mandatory" }}
           >
             {[1, 2, 3, 4].map((num) => (
               <div
                 key={num}
-                className="h-[600px] flex items-center justify-center text-white text-6xl font-bold"
+                className="h-[600px] w-full flex items-center justify-center text-white text-3xl sm:text-5xl font-bold"
                 style={{
                   scrollSnapAlign: "start",
                   background: `linear-gradient(135deg, hsl(${
@@ -1061,7 +1061,7 @@ export default function SkillDetailPage({ params }: PageProps) {
             ))}
           </div>
         </div>
-        <div className="bg-blue-50 rounded-xl p-6">
+        <div className="bg-blue-50 rounded-xl p-6 w-full max-w-4xl mx-auto">
           <h3 className="text-xl font-bold mb-3">주요 기능</h3>
           <ul className="space-y-2 text-gray-700">
             <li>• CSS Scroll Snap 활용</li>

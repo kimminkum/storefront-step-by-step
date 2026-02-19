@@ -386,7 +386,7 @@
   }
 
   .swiper-remote-control {
-    bottom: 70px;
+    bottom: 40px;
     padding: 8px 16px;
     gap: 8px;
   }
@@ -398,7 +398,7 @@
   }
 
   .remote-counter {
-    font-size: 12px;
+    font-size: 10px;
     padding: 0 8px;
   }
 }
