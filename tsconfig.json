@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "module": "ESNext",
     "incremental": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
